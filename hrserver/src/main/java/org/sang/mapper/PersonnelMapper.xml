@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sang.mapper.PersonnelMapper">
+
+    <insert id="addEc" parameterType="org.sang.bean.EmpEc">
+        insert into employeeec(eid,ecDate,ecReason,ecType,remark)
+        values (#{eid},#{ecDate},#{ecReason},#{ecType},#{remark});
+    </insert>
+    <select id="getAllEmpTrains" resultType="org.sang.bean.EmpTrain">
+        select name,workID,eid,trainDate,trainContent,remark from employee e,employeetrain t where t.eid=e.id;
+    </select>
+    
+    <insert id="addEmpTrain" parameterType="org.sang.bean.EmpTrain">
+        insert into employeetrain(eid,trainDate,trainContent,remark)
+        values (#{eid},#{trainDate},#{trainContent},#{remark});
+    </insert>
+
+    <update id="updateEmpTrain" parameterType="org.sang.bean.EmpTrain">
+        update employeetrain
+        <set>
+            <if test="eid != null">
+                eid = #{eid},
+            </if>
+            <if test="trainDate != null">
+                trainDate = #{trainDate},
+            </if>
+            <if test="trainContent != null">
+                trainContent = #{trainContent},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEmpTrain">
+        DELETE FROM employeetrain WHERE id IN
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getAllAdjustSalary" resultType="org.sang.bean.AdjustSalary">
+        select * from adjustsalary;
+    </select>
+
+    <insert id="addAdjustSalary" parameterType="org.sang.bean.AdjustSalary">
+        insert into adjustsalary(eid,asDate,beforeSalary,afterSalary,reason,remark)
+        values (#{eid},#{asDate},#{beforeSalary},#{afterSalary},#{reason},#{remark})
+    </insert>
+
+    <update id="updateAdjustSalary" parameterType="org.sang.bean.AdjustSalary">
+        update adjustsalary
+        <set>
+            <if test="eid != null and eid != ''">
+                eid = #{eid},
+            </if>
+            <if test="asDate != null and asDate != ''">
+                asDate = #{asDate},
+            </if>
+            <if test="beforeSalary != null and beforeSalary != ''">
+                beforeSalary = #{beforeSalary},
+            </if>
+            <if test="afterSalary != null and afterSalary != ''">
+                afterSalary = #{afterSalary},
+            </if>
+            <if test="reason != null and reason != ''">
+                reason = #{reason},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAdjustSalary">
+        DELETE FROM adjustSalary WHERE id IN
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getAllEmpMove" resultType="org.sang.bean.EmpMove">
+        select * from employeeremove;
+    </select>
+
+    <insert id="addEmpMove" parameterType="org.sang.bean.EmpMove">
+        insert into employeeremove(eid,afterDepId,afterJobId,removeDate,reason,remark)
+        values (#{eid},#{afterDepId},#{afterJobId},#{removeDate},#{reason},#{remark});
+    </insert>
+
+    <update id="updateEmpMove" parameterType="org.sang.bean.EmpMove">
+        update employeeremove
+        <set>
+            <if test="eid != null and eid != ''">
+                eid = #{eid},
+            </if>
+            <if test="afterDepId != null and afterDepId != ''">
+                afterDepId = #{afterDepId},
+            </if>
+            <if test="afterJobId != null and afterJobId != ''">
+                afterJobId = #{afterJobId},
+            </if>
+            <if test="removeDate != null and removeDate != ''">
+                removeDate = #{removeDate},
+            </if>
+            <if test="reason != null and reason != ''">
+                reason = #{reason},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
