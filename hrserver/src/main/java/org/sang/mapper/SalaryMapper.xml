@@ -75,4 +75,24 @@
     <insert id="addSidAndEid">
         INSERT INTO empsalary set eid=#{eid},sid=#{sid}
     </insert>
+
+    <select id="getLeaveCount" parameterType="Long" resultType="int">
+        select COUNT(*) from employeeec
+        where eid=#{eid} and ecReason="请假";
+    </select>
+
+    <select id="getLateCount" parameterType="Long" resultType="int">
+        select COUNT(*) from employeeec
+        where eid=#{eid} and ecReason="迟到";
+    </select>
+
+    <select id="getOvertime" parameterType="Long" resultType="int">
+        select COUNT(*) from employeeec
+        where eid=#{eid} and ecReason="加班";
+    </select>
+
+    <select id="getSalaryById" parameterType="Long" resultType="org.sang.bean.Salary">
+        select * from salary
+        where id=(select sid from empsalary where eid=#{id});
+    </select>
 </mapper>

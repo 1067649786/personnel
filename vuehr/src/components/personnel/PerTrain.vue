@@ -166,7 +166,7 @@
         this.empTrain = row;
       },
       handleDelete(index, row) {
-        this.$confirm('删除[' + row.name + ']的培训信息, 是否继续?', '提示', {
+        this.$confirm('删除[' + row.eid + ']的培训信息, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

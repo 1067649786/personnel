@@ -15,6 +15,10 @@ public interface PersonnelMapper {
 
     int addEc(EmpEc empEc);
 
+    List<EmpEc> getAllEmpEc();
+
+
+
     int addEmpTrain(EmpTrain empTrain);
 
     int updateEmpTrain(EmpTrain empTrain);
@@ -23,18 +27,27 @@ public interface PersonnelMapper {
 
     List<EmpTrain> getAllEmpTrains();
 
-    int addAdjustSalary(AdjustSalary adjustSalary);
 
-    int updateAdjustSalary(AdjustSalary adjustSalary);
+
+    int addAdjustSalary(@Param("adjustSalary") AdjustSalary adjustSalary);
+
+    int updateAdjustSalary(@Param("adjustSalary") AdjustSalary adjustSalary);
 
     int deleteAdjustSalary(@Param("ids") String[] ids);
 
     List<AdjustSalary> getAllAdjustSalary();
 
-    int addEmpMove(EmpMove empMove);
 
-    int updateEmpMove(EmpMove empMove);
+
+
+    int addEmpMove(@Param("empMove") EmpMove empMove);
+
+    int updateEmpMove(@Param("empMove") EmpMove empMove);
+
+    int deleteEmpMove(@Param("ids") String[] ids);
 
     List<EmpMove> getAllEmpMove();
+
+    int updateDepIdAndJobId(@Param("empMove") EmpMove empMove);
 
 }

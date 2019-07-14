@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.sang.mapper.StatisticsMapper">
+
+    <select id="getJoinCount" parameterType="Long" resultType="int">
+        select COUNT(*) from employeeremove
+        where afterDepId=#{depId};
+    </select>
+
+    <select id="getAllPeoplebyDepId" parameterType="Long" resultType="int">
+        select COUNT(*) from employee
+        where departmentId=#{depId};
+    </select>
+
+    <select id="getAllDeps" resultType="org.sang.bean.Department">
+        select * from department;
+    </select>
+</mapper>

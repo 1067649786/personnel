@@ -8,6 +8,12 @@
         insert into employeeec(eid,ecDate,ecReason,ecType,remark)
         values (#{eid},#{ecDate},#{ecReason},#{ecType},#{remark});
     </insert>
+
+    <select id="getAllEmpEc" resultType="org.sang.bean.EmpEc">
+        select * from employeeec;
+    </select>
+
+
     <select id="getAllEmpTrains" resultType="org.sang.bean.EmpTrain">
         select name,workID,eid,trainDate,trainContent,remark from employee e,employeetrain t where t.eid=e.id;
     </select>
@@ -43,46 +49,6 @@
         </foreach>
     </delete>
 
-    <select id="getAllAdjustSalary" resultType="org.sang.bean.AdjustSalary">
-        select * from adjustsalary;
-    </select>
-
-    <insert id="addAdjustSalary" parameterType="org.sang.bean.AdjustSalary">
-        insert into adjustsalary(eid,asDate,beforeSalary,afterSalary,reason,remark)
-        values (#{eid},#{asDate},#{beforeSalary},#{afterSalary},#{reason},#{remark})
-    </insert>
-
-    <update id="updateAdjustSalary" parameterType="org.sang.bean.AdjustSalary">
-        update adjustsalary
-        <set>
-            <if test="eid != null and eid != ''">
-                eid = #{eid},
-            </if>
-            <if test="asDate != null and asDate != ''">
-                asDate = #{asDate},
-            </if>
-            <if test="beforeSalary != null and beforeSalary != ''">
-                beforeSalary = #{beforeSalary},
-            </if>
-            <if test="afterSalary != null and afterSalary != ''">
-                afterSalary = #{afterSalary},
-            </if>
-            <if test="reason != null and reason != ''">
-                reason = #{reason},
-            </if>
-            <if test="remark != null and remark != ''">
-                remark = #{remark},
-            </if>
-        </set>
-        where id = #{id}
-    </update>
-
-    <delete id="deleteAdjustSalary">
-        DELETE FROM adjustSalary WHERE id IN
-        <foreach collection="ids" separator="," item="id" open="(" close=")">
-            #{id}
-        </foreach>
-    </delete>
 
     <select id="getAllEmpMove" resultType="org.sang.bean.EmpMove">
         select * from employeeremove;
@@ -90,31 +56,89 @@
 
     <insert id="addEmpMove" parameterType="org.sang.bean.EmpMove">
         insert into employeeremove(eid,afterDepId,afterJobId,removeDate,reason,remark)
-        values (#{eid},#{afterDepId},#{afterJobId},#{removeDate},#{reason},#{remark});
+        values (#{empMove.eid},#{empMove.afterDepId},
+        #{empMove.afterJobId},#{empMove.removeDate},
+        #{empMove.reason},#{empMove.remark});
     </insert>
 
     <update id="updateEmpMove" parameterType="org.sang.bean.EmpMove">
         update employeeremove
         <set>
-            <if test="eid != null and eid != ''">
-                eid = #{eid},
+            <if test="empMove.eid != null and empMove.eid != ''">
+                eid = #{empMove.eid},
             </if>
-            <if test="afterDepId != null and afterDepId != ''">
-                afterDepId = #{afterDepId},
+            <if test="empMove.afterDepId != null and empMove.afterDepId != ''">
+                afterDepId = #{empMove.afterDepId},
             </if>
-            <if test="afterJobId != null and afterJobId != ''">
-                afterJobId = #{afterJobId},
+            <if test="empMove.afterJobId != null and empMove.afterJobId != ''">
+                afterJobId = #{empMove.afterJobId},
             </if>
-            <if test="removeDate != null and removeDate != ''">
-                removeDate = #{removeDate},
+            <if test="empMove.removeDate != null and empMove.removeDate != ''">
+                removeDate = #{empMove.removeDate},
             </if>
-            <if test="reason != null and reason != ''">
-                reason = #{reason},
+            <if test="empMove.reason != null and empMove.reason != ''">
+                reason = #{empMove.reason},
             </if>
-            <if test="remark != null and remark != ''">
-                remark = #{remark},
+            <if test="empMove.remark != null and empMove.remark != ''">
+                remark = #{empMove.remark},
             </if>
         </set>
-        where id = #{id}
+        where id = #{empMove.id}
     </update>
+
+    <delete id="deleteEmpMove">
+        DELETE FROM employeeremove WHERE id IN
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateDepIdAndJobId" parameterType="org.sang.bean.EmpMove">
+        update employee set departmentId=#{empMove.afterDepId},jobLevelId=#{empMove.afterJobId}
+        where id=#{empMove.eid}
+    </update>
+
+
+    <insert id="addAdjustSalary" parameterType="org.sang.bean.AdjustSalary">
+        insert into adjustsalary(eid,asDate,beforeSalary,afterSalary,reason,remark)
+        values (#{adjustSalary.eid},#{adjustSalary.asDate},
+        #{adjustSalary.beforeSalary},#{adjustSalary.afterSalary},
+        #{adjustSalary.reason},#{adjustSalary.remark})
+    </insert>
+
+    <update id="updateAdjustSalary" parameterType="org.sang.bean.AdjustSalary">
+        update adjustsalary
+        <set>
+            <if test="adjustSalary.eid != null">
+                eid = #{adjustSalary.eid},
+            </if>
+            <if test="adjustSalary.asDate != null">
+                asDate = #{adjustSalary.asDate},
+            </if>
+            <if test="adjustSalary.beforeSalary != null">
+                beforeSalary = #{adjustSalary.beforeSalary},
+            </if>
+            <if test="adjustSalary.afterSalary != null">
+                afterSalary = #{adjustSalary.afterSalary},
+            </if>
+            <if test="adjustSalary.reason != null">
+                reason = #{adjustSalary.reason},
+            </if>
+            <if test="adjustSalary.remark != null">
+                remark = #{adjustSalary.remark},
+            </if>
+        </set>
+        where id = #{adjustSalary.id}
+    </update>
+
+    <delete id="deleteAdjustSalary">
+        DELETE FROM adjustsalary WHERE id IN
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getAllAdjustSalary" resultType="org.sang.bean.AdjustSalary">
+        select * from adjustsalary;
+    </select>
 </mapper>
