@@ -29,9 +29,6 @@ public class EmpTrainController {
 
     @RequestMapping(value = "/trains", method = RequestMethod.POST)
     public RespBean addEmpTrain(EmpTrain empTrain){
-        System.out.println("========"+empTrain.getTrainDate().toString());
-        //Employee employee =empService.getEmpByIdAndName(empTrain.getWorkID(),empTrain.getName());
-        //if(employee==null) return RespBean.error("员工信息错误");
         if(personnelService.addEmpTrain(empTrain)==1){
             return RespBean.ok("添加成功");
         }
@@ -45,15 +42,6 @@ public class EmpTrainController {
 
     @RequestMapping(value = "/trains", method = RequestMethod.PUT)
     public RespBean updateEmpTrain(EmpTrain empTrain){
-        System.out.println("========"+empTrain.getTrainDate().toString());
-        //Employee employee=empService.getEmpByIdAndName(empTrain.getWorkID(),empTrain.getName());
-        //if(employee==null) return RespBean.error("员工信息错误");
-        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //String trainDate=simpleDateFormat.format(empTrain.getTrainDate());
-        //DateConverter dateConverter=new DateConverter();
-        //Date date=dateConverter.convert(trainDate);
-        //System.out.println("=========="+date);
-        //empTrain.setTrainDate(date);
         if(personnelService.updateEmpTrain(empTrain)==1){
             return RespBean.ok("修改成功");
         }
@@ -61,7 +49,7 @@ public class EmpTrainController {
     }
     @RequestMapping(value = "/trains/{ids}", method = RequestMethod.DELETE)
     public RespBean deleteEmpTrain(@PathVariable String ids){
-        if(personnelService.deleteEmpTrain(ids)==1){
+        if(personnelService.deleteEmpTrain(ids)>=1){
             return RespBean.ok("删除成功");
         }
         return RespBean.error("删除失败");

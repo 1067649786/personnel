@@ -58,15 +58,6 @@
                   </el-button>
                 </template>
               </el-table-column>
-              <el-table-column label="删除" align="center">
-                <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDelete(scope.$index, scope.row)">删除
-                  </el-button>
-                </template>
-              </el-table-column>
             </el-table-column>
           </el-table>
         </div>

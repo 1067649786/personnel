@@ -15,31 +15,31 @@
 
 
     <select id="getAllEmpTrains" resultType="org.sang.bean.EmpTrain">
-        select name,workID,eid,trainDate,trainContent,remark from employee e,employeetrain t where t.eid=e.id;
+        select * from employeetrain;
     </select>
     
     <insert id="addEmpTrain" parameterType="org.sang.bean.EmpTrain">
         insert into employeetrain(eid,trainDate,trainContent,remark)
-        values (#{eid},#{trainDate},#{trainContent},#{remark});
+        values (#{empTrain.eid},#{empTrain.trainDate},#{empTrain.trainContent},#{empTrain.remark});
     </insert>
 
     <update id="updateEmpTrain" parameterType="org.sang.bean.EmpTrain">
         update employeetrain
         <set>
-            <if test="eid != null">
-                eid = #{eid},
+            <if test="empTrain.eid != null">
+                eid = #{empTrain.eid},
             </if>
-            <if test="trainDate != null">
-                trainDate = #{trainDate},
+            <if test="empTrain.trainDate != null">
+                trainDate = #{empTrain.trainDate},
             </if>
-            <if test="trainContent != null">
-                trainContent = #{trainContent},
+            <if test="empTrain.trainContent != null">
+                trainContent = #{empTrain.trainContent},
             </if>
-            <if test="remark != null">
-                remark = #{remark},
+            <if test="empTrain.remark != null">
+                remark = #{empTrain.remark},
             </if>
         </set>
-        where id = #{id}
+        where id = #{empTrain.id}
     </update>
 
     <delete id="deleteEmpTrain">

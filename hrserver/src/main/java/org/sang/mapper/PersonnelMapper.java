@@ -19,9 +19,9 @@ public interface PersonnelMapper {
 
 
 
-    int addEmpTrain(EmpTrain empTrain);
+    int addEmpTrain(@Param("empTrain") EmpTrain empTrain);
 
-    int updateEmpTrain(EmpTrain empTrain);
+    int updateEmpTrain(@Param("empTrain") EmpTrain empTrain);
 
     int deleteEmpTrain(@Param("ids") String[] ids);
 
