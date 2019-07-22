@@ -39,13 +39,13 @@
               <template slot-scope="scope">{{ scope.row.removeDate | formatDate}}</template>
             </el-table-column>
             <el-table-column
-              width="70"
+              width="350"
               prop="reason"
               label="调动原因">
             </el-table-column>
             <el-table-column
               prop="remark"
-              width="70"
+              width="350"
               label="备注">
             </el-table-column>
 

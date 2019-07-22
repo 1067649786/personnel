@@ -10,9 +10,6 @@
       <el-tab-pane label="职称管理" name="jobTitleMana">
         <pos-mana state="jobtitle"></pos-mana>
       </el-tab-pane>
-      <el-tab-pane label="奖惩规则" name="ecCfg">
-        <ec-mana></ec-mana>
-      </el-tab-pane>
       <el-tab-pane label="权限组" name="menuRole">
         <menu-role></menu-role>
       </el-tab-pane>
@@ -22,7 +19,6 @@
 <script>
   import MenuRole from './basic/MenuRole.vue'
   import DepMana from './basic/DepMana.vue'
-  import ECMana from './basic/ECMana.vue'
   import JobTitleMana from './basic/JobTitleMana.vue'
   import PosMana from './basic/PosMana.vue'
   export default {
@@ -35,7 +31,6 @@
     components: {
       'menu-role': MenuRole,
       'dep-mana': DepMana,
-      'ec-mana': ECMana,
       'jobtitle-mana': JobTitleMana,
       'pos-mana': PosMana
     }
